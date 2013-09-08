@@ -3,12 +3,12 @@ module ConnorCommon (isPrime, intSquareRoot, isFactor, primes, primesTo) where
   import qualified Data.Map as M
 
   isFactor :: Integer -> Integer -> Bool
-  isFactor x y = y `mod` x == 0
-
   intSquareRoot :: Integer -> Integer
-  intSquareRoot x = (floor . sqrt . fromIntegral) x
-
+  primesMPE :: [Integer]
   isPrime :: Integer -> Bool
+
+  isFactor x y = y `mod` x == 0
+  intSquareRoot x = (floor . sqrt . fromIntegral) x
   isPrime x = length ([ y | y <- [2..mid], isFactor y x ]) == 0
     where mid = intSquareRoot x
 
@@ -16,7 +16,6 @@ module ConnorCommon (isPrime, intSquareRoot, isFactor, primes, primesTo) where
   primes = primesMPE
   primesTo n = takeWhile (lessThanFilter n) primes
    
-  primesMPE :: [Integer]
   primesMPE = 2:mkPrimes 3 M.empty prs 9   -- postponed addition of primes into map;
     where                                  -- decoupled primes loop feed 
       prs = 3:mkPrimes 5 M.empty prs 9
