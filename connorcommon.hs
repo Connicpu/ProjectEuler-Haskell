@@ -1,4 +1,8 @@
-module ConnorCommon (isPrime, intSquareRoot, isFactor, primes, primesTo) where
+module ConnorCommon (
+  isPrime, intSquareRoot, 
+  isFactor, primes, primesTo, 
+  third) where
+  
   import Data.List
   import qualified Data.Map as M
 
@@ -6,6 +10,8 @@ module ConnorCommon (isPrime, intSquareRoot, isFactor, primes, primesTo) where
   intSquareRoot :: Integer -> Integer
   primesMPE :: [Integer]
   isPrime :: Integer -> Bool
+
+  third (_, _, x) = x
 
   isFactor x y = y `mod` x == 0
   intSquareRoot x = (floor . sqrt . fromIntegral) x
