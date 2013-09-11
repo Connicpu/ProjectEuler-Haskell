@@ -1,27 +1,32 @@
 module ConnorCommon (
   isPrime, intSquareRoot, 
   isFactor, primes, primesTo, 
-  third) where
+  third, divisors) where
   
   import Data.List
   import qualified Data.Map as M
 
-  isFactor :: Integer -> Integer -> Bool
-  intSquareRoot :: Integer -> Integer
-  primesMPE :: [Integer]
-  isPrime :: Integer -> Bool
+  divisors :: Integer -> [Integer]
+  divisors n = [ x | x <- [1..mid], x `isFactor` n ]
+    where mid = n `div` 2
 
   third (_, _, x) = x
 
+  isFactor :: Integer -> Integer -> Bool
   isFactor x y = y `mod` x == 0
+
+  intSquareRoot :: Integer -> Integer
   intSquareRoot x = ceiling.sqrt.fromIntegral $ x
+
+  isPrime :: Integer -> Bool
   isPrime x = length ([ y | y <- [2..mid], isFactor y x ]) == 0
     where mid = intSquareRoot x
 
   lessThanFilter x y = (x > y)
   primes = primesMPE
   primesTo n = takeWhile (lessThanFilter n) primes
-   
+  
+  primesMPE :: [Integer]
   primesMPE = 2:mkPrimes 3 M.empty prs 9   -- postponed addition of primes into map;
     where                                  -- decoupled primes loop feed 
       prs = 3:mkPrimes 5 M.empty prs 9

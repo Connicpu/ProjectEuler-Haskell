@@ -1,8 +1,4 @@
-import ConnorCommon (isFactor)
-
-divisors :: Integer -> [Integer]
-divisors n = [ x | x <- [1..mid], x `isFactor` n ]
-  where mid = n `div` 2
+import ConnorCommon (isFactor, divisors)
 
 d :: Integer -> Integer
 d n = sum.divisors $ n
