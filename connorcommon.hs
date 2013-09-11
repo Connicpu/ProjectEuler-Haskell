@@ -14,7 +14,7 @@ module ConnorCommon (
   third (_, _, x) = x
 
   isFactor x y = y `mod` x == 0
-  intSquareRoot x = (floor . sqrt . fromIntegral) x
+  intSquareRoot x = ceiling.sqrt.fromIntegral $ x
   isPrime x = length ([ y | y <- [2..mid], isFactor y x ]) == 0
     where mid = intSquareRoot x
 
