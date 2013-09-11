@@ -1,18 +1,21 @@
 module ConnorCommon (
   isPrime, intSquareRoot, 
   isFactor, primes, primesTo, 
-  third, divisors) where
+  third, divisors, index) where
   
   import Data.List
   import qualified Data.Map as M
 
-  divisors :: Integer -> [Integer]
+  index :: Eq a => a -> [a] -> Integer
+  index item list = maybe (-1) toInteger (elemIndex item list)
+
+  divisors :: Integral a => a -> [a]
   divisors n = [ x | x <- [1..mid], x `isFactor` n ]
     where mid = n `div` 2
 
   third (_, _, x) = x
 
-  isFactor :: Integer -> Integer -> Bool
+  isFactor :: Integral a => a -> a -> Bool
   isFactor x y = y `mod` x == 0
 
   intSquareRoot :: Integer -> Integer

@@ -2,12 +2,10 @@ import Data.Char (toLower)
 import Data.List (elemIndex)
 import Data.List.Split (splitOn)
 import Data.List.Ordered (sort)
+import ConnorCommon (index)
 
 charValue :: Char -> Integer
 charValue char = (index (toLower char) ['a'..'z']) + 1
-
-index :: Eq a => a -> [a] -> Integer
-index item list = maybe (-1) toInteger (elemIndex item list)
 
 names :: String -> [String]
 names raw = [ read n :: String | n <- splitOn "," raw ]
