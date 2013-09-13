@@ -1,24 +1,45 @@
 import ConnorCommon (divisors, index)
-import Debug.Trace (trace)
+import Data.Array
+import System.IO
+
+hasAny :: Eq a => [a] -> Bool
+hasAny [] = False
+hasAny xs = True
 
 limit :: Int
-limit = 28124
+limit = 20162
 
 abundant :: Int -> Bool
-abundant n = (sum.divisors $ n) > n
+abundant = (map abundant' [0..] !!)
+  where abundant' n = (sum.divisors $ n) > n
 
 abundantNumbers :: [Int]
-abundantNumbers = [ x | x <- [1..limit], abundant x ]
-
-abundantDiffs :: Int -> [Int]
-abundantDiffs n = map (n-) $ takeWhile (< n `div` 2) abundantNumbers
+abundantNumbers = filter (abundantArray !) [1..limit]
+  where abundantArray = listArray (1, limit) $ map abundant [1..limit]
 
 nonAbundant :: Int -> Bool
-nonAbundant n = not $ any (abundant) (abundantDiffs n)
+nonAbundant = (map nonAbundant' [0..] !!)
+  where
+    abundantDiffs n = filter (abundant) $ map (n-) $ takeWhile (<= half) abundantNumbers
+      where half = n `div` 2
+    nonAbundant' n = not $ hasAny (abundantDiffs n)
+
+nonAbundantNumbers :: [Int]
+nonAbundantNumbers = filter nonAbundant [1..limit]
 
 problem_23 :: Integer
-problem_23 = sum $ map toInteger $ filter (nonAbundant) [1..limit]
+problem_23 = sum $ map toInteger nonAbundantNumbers
 
 main :: IO ()
-main = putStrLn $ "Sum of Non-SuperAbundant numbers: " ++ (show problem_23)
+main = do
+  hSetBuffering stdout NoBuffering
+
+  putStr $ "Memoizing abundant numbers... "
+  putStrLn $ (show.length $ abundantNumbers) ++ " done!"
+
+  putStr $ "Memoizing unabundant sum numbers... "
+  putStrLn $ (show.length $ nonAbundantNumbers) ++ " done!"
+
+  putStr $ "Calculating sum of unabundant numbers: "
+  putStrLn $ show problem_23
 
