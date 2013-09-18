@@ -1,27 +1,17 @@
 import System.Environment
 
-fibonacci :: Integer -> Integer
-fibonacci 0 = 0
-fibonacci 1 = 1
-fibonacci n = fibonacci (n-1) + fibonacci (n-2)
+fib :: Int -> Integer
+fib = (map fib' [0..] !!)
+  where
+    fib' 0 = 0
+    fib' 1 = 1
+    fib' n = fib (n-2) + fib (n-1)
 
-isEven x = mod x 2 == 0
-
-appendEvenFibonaccy :: Integer -> [Integer] -> [Integer]
-appendEvenFibonaccy fx list =
-  if isEven fx
-    then fx:list
-    else list
-
-evenFibonacci :: Integer -> Integer -> [Integer] -> [Integer]
-evenFibonacci x max list =
-  if fx >= max 
-    then list 
-    else evenFibonacci (x+1) max (appendEvenFibonaccy fx list)
-  where fx = fibonacci x
+fibonacci :: [Integer]
+fibonacci = map fib [1..]
 
 evenFibonacciSum :: Integer -> [Char]
-evenFibonacciSum max = show (sum (evenFibonacci 0 max []))
+evenFibonacciSum n = show (sum $ takeWhile (<=n) [ x | x <- fibonacci, (x `mod` 2) == 0 ])
 
 main :: IO ()
 main = do print ("Sum: " ++ (evenFibonacciSum 4000000))

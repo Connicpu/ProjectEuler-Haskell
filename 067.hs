@@ -14,5 +14,5 @@ routeValues tri = foldr1 routeValue tri
 
 main :: IO ()
 main = do
-  triangleData <- readFile "018_triangle.txt"
+  triangleData <- readFile "067_triangle.txt"
   putStrLn $ "Triangle: " ++ (show . highestValueRoute $ triangle triangleData)

@@ -1,5 +1,4 @@
 import Data.Char (toLower)
-import Data.List (elemIndex)
 import Data.List.Split (splitOn)
 import Data.List.Ordered (sort)
 import ConnorCommon (index)
@@ -11,7 +10,7 @@ names :: String -> [String]
 names raw = [ read n :: String | n <- splitOn "," raw ]
 
 sortedNames :: [String] -> [String]
-sortedNames names = sort names
+sortedNames xs = sort xs
 
 nameValue :: String -> [String] -> Integer
 nameValue name list = (1 + index name list) * (sum [ charValue x | x <- name ])

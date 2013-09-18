@@ -1,4 +1,4 @@
-import ConnorCommon (isFactor, divisors)
+import ConnorCommon (divisors)
 
 d :: Integer -> Integer
 d n = sum.divisors $ n

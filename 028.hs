@@ -1,12 +1,10 @@
-type Grid = [[Int]]
-
 ringCornerSum :: Integer -> Integer
-ringCornerSum n = ringCornerSum' n
+ringCornerSum n' = ringCornerSum' n'
   where
     ringCornerSum' 1 = 1
     ringCornerSum' n = tl + tr + bl + br + (ringCornerSum' $ n - 2)
       where
-        tr = n^2
+        tr = n^(2::Integer)
         tl = tr - (n - 1)
         bl = tl - (n - 1)
         br = bl - (n - 1)

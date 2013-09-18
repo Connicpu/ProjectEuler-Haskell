@@ -1,5 +1,6 @@
 import ConnorCommon
 
+targetNumber :: Integer
 targetNumber = 600851475143
 
 largestPrimeFactor :: Integer -> Integer -> Integer

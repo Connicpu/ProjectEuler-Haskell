@@ -1,4 +1,3 @@
-import ConnorCommon (third)
 import Data.Ratio
 import Data.List.Ordered
 
@@ -29,3 +28,6 @@ fractionLengths = map (\a -> [(toInteger.length $ getRecurringCycle a), denomina
 
 problem_26 :: Integer
 problem_26 = (!! 1).last $ sort fractionLengths
+
+main :: IO ()
+main = putStrLn $ show problem_26

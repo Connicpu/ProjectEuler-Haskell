@@ -1,16 +1,16 @@
-import ConnorCommon (divisors, index)
+import ConnorCommon (divisors)
 import Data.Array
 import System.IO
 
 hasAny :: Eq a => [a] -> Bool
 hasAny [] = False
-hasAny xs = True
+hasAny _  = True
 
 limit :: Int
 limit = 20162
 
 abundant :: Int -> Bool
-abundant = (map abundant' [0..] !!)
+abundant = (map abundant' [(0::Integer)..] !!)
   where abundant' n = (sum.divisors $ n) > n
 
 abundantNumbers :: [Int]

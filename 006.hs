@@ -4,6 +4,7 @@ squares set = [ x*x | x <- set ]
 square :: (Num a) => a -> a
 square x = x*x
 
+numbers :: [Integer]
 numbers = [1..100]
 
 main :: IO ()
