@@ -1,5 +1,5 @@
 module ConnorCommon (
-  isPrime, intSquareRoot, 
+  isPrime, intSquareRoot,
   isFactor, primes, primesTo, 
   third, divisors, index) where
   
